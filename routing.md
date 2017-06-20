@@ -7,6 +7,7 @@
 1. Create About, Links, and Resume components
 1. Edit the HTML for the About, Links, and Resume components
 1. Display all components at once
+1. Set up the router
 
 ## Create a new angular app
 
@@ -113,3 +114,37 @@ Edit `src/app/app.component.html`:
 ```
 
 You should now see all components displayed on the page
+
+## Set up the router
+
+First import the RouterModule in to `src/app/app.module.ts`:
+
+```javascript
+import { AppComponent } from './app.component';
+import { AboutComponent } from './about/about.component';
+import { LinksComponent } from './links/links.component';
+import { ResumeComponent } from './resume/resume.component';
+import { RouterModule } from '@angular/router'; // add import statement here
+```
+
+Now add the module as an import in `src/app/app.module.ts` and define which modules go with which routes:
+
+```javascript
+imports: [
+  BrowserModule,
+  RouterModule.forRoot([
+    {
+      path: 'about',
+      component: AboutComponent
+    },
+    {
+      path: 'resume',
+      component: ResumeComponent
+    },
+    {
+      path: 'links',
+      component: LinksComponent
+    }
+  ])
+],
+```
