@@ -6,6 +6,7 @@
 1. Clean up app HTML
 1. Create About, Links, and Resume components
 1. Edit the HTML for the About, Links, and Resume components
+1. Display all components at once
 
 ## Create a new angular app
 
@@ -99,3 +100,16 @@ Edit `src/app/resume/resume.component.html`:
     </li>
 </ul>
 ```
+
+## Display all components at once
+
+Edit `src/app/app.component.html`:
+
+```html
+<h1>Welcome To My Personal Site</h1>
+<app-about></app-about>
+<app-links></app-links>
+<app-resume></app-resume>
+```
+
+You should now see all components displayed on the page
