@@ -5,6 +5,8 @@
 1. Define what URL params are
 1. Create an external data file
 1. Use the data file to generate links
+1. Have Resume component display the id param
+1. Show specific job data based on id param
 
 ## Define what URL params are
 
@@ -102,3 +104,37 @@ const routes: Routes = [
     }
 ];
 ```
+
+## Have Resume component display the id param
+
+At this point, the resume shows all the jobs.  But we want to show just one job.  Edit `src/app/resume/resume.component.ts` to import `ActivatedRoute`:
+
+```javascript
+import { ActivatedRoute }   from '@angular/router';
+```
+
+Now update the class definition:
+
+```javascript
+export class ResumeComponent implements OnInit {
+
+    jobIndex: Number; //set up public class member
+
+    constructor(
+        private route: ActivatedRoute //make URL routes available to class
+    ) { }
+
+    ngOnInit() {
+        this.route.params.forEach( param => this.jobIndex = param.id )
+    }
+
+}
+```
+
+Test that this works by showing `jobIndex` in `src/app/resume/resume.component.html`:
+
+```html
+<h2>Resume: {{jobIndex}}</h2>
+```
+
+## Show specific job data based on id param
