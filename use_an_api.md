@@ -176,3 +176,39 @@ The `rxjs/add/operator/toPromise` import that we previously wrote adds the abili
 You can test this by looking in the console
 
 ## Display AJAX results in app
+
+In `src/app/search/search.component.ts` add a public `results` property and set it to the results of the AJAX call when it succeeds:
+
+```javascript
+export class SearchComponent implements OnInit {
+
+    results; //add the public property here
+
+    constructor(
+        private http: Http
+    ) { }
+
+    findCharacter(name){
+        this.http.get('http://swapi.co/api/people/?search=' + name)
+        .toPromise()
+        .then(response => this.results = response.json().results); //set it here
+    }
+
+    ngOnInit() {
+    }
+
+}
+```
+
+Now add some HTML to `src/app/search/search.component.html` to display the results:
+
+```html
+<section *ngIf="results">
+    <h2>Search Results</h2>
+    <ul>
+        <li *ngFor="let character of results">{{character.name}}</li>
+    </ul>
+</section>
+```
+
+You can test this in the app
