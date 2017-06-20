@@ -14,3 +14,7 @@ ng serve --open
 ```
 
 ## Generate a new component
+
+```
+ng generate component search
+```
