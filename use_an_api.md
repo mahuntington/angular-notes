@@ -11,6 +11,8 @@
 1. Set a component property to the value of an input
 1. Invoke a function when the user clicks a button
 1. Add the ability to make AJAX requests
+1. Make an AJAX request
+1. Display AJAX results in app
 
 ## Create a new app
 
@@ -172,3 +174,5 @@ findCharacter(name){
 The `rxjs/add/operator/toPromise` import that we previously wrote adds the ability to change the `Observable` (more on this in another lecture) into a `Promise`
 
 You can test this by looking in the console
+
+## Display AJAX results in app
