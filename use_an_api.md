@@ -4,6 +4,7 @@
 
 1. Create a new app
 1. Generate a new component
+1. Clean up app.component.html
 
 ## Create a new app
 
@@ -17,4 +18,12 @@ ng serve --open
 
 ```
 ng generate component search
+```
+
+## Clean up app.component.html
+
+Set `src/app/app.component.html` contents to:
+
+```html
+<h1>Star Wars Character Search App</h1>
 ```
