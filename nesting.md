@@ -7,6 +7,7 @@
 1. Move the appropriate HTML to each sub section component
 1. Create a router just for the sub sections
 1. Replace the old main route with the new routing module
+1. Add the router outlet for the sub sections:
 
 ## Describe nested routes
 
@@ -98,7 +99,7 @@ const routes: Routes = [
 And add the `about-routing.module.ts` module to `src/app/app.module.ts`:
 
 ```javascript
-import { AboutRoutingModule} from './about/about-routing.module'
+import { AboutRoutingModule} from './about/about-routing.module' //import the new routing module
 
 @NgModule({
     declarations: [
@@ -112,9 +113,42 @@ import { AboutRoutingModule} from './about/about-routing.module'
     imports: [
         BrowserModule,
         AppRoutingModule,
-        AboutRoutingModule
+        AboutRoutingModule //add the module here
     ],
     providers: [],
     bootstrap: [AppComponent]
 })
+```
+
+## Add the router outlet for the sub sections:
+
+Edit `src/app/about/about.component.html`:
+
+```html
+<h2>This is the About Section of the Site</h2>
+<router-outlet></router-outlet>
+```
+
+You can now test by going to:
+
+- http://localhost:4200/about/early-life
+- http://localhost:4200/about/career
+
+## Add links to the various sub sections:
+
+You can now create links to these sub section in `src/app/about/about.component.html`:
+
+```html
+<h2>About Page</h2>
+<nav>
+    <ul>
+        <li>
+            <a routerLink="early-life">Early Life</a>
+        </li>
+        <li>
+            <a routerLink="career">Career</a>
+        </li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>
 ```
