@@ -1,4 +1,4 @@
-## Routing Summary
+# Routing Summary
 
 You now can create a single page application that allows the user to:
 
