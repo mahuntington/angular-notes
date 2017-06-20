@@ -6,8 +6,8 @@
 1. [:15] Lesson: [What is routing?](what_is_routing.md)
 1. [:15] Lesson/Code-along: [Routing in Angular](routing.md)
 1. [:15] Lesson/Code-along: [URL Params](url_params.md)
-1. [:15] Lesson/Code-along: Nesting
-1. [:10] Lesson: Summary
+1. [:15] Lesson/Code-along: [Nesting](nesting.md)
+1. [:10] Lesson: [Summary](summary.md)
 1. [:15] Lesson/Demo: APIs
 1. [:15] Code-along: APIs
 1. [:15] Lesson/Code-along: AJAX/Routing
