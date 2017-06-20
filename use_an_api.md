@@ -6,6 +6,7 @@
 1. Generate a new component
 1. Clean up app.component.html
 1. Add search component to app
+1. Add Form HTML to search component
 
 ## Create a new app
 
@@ -31,7 +32,21 @@ Set `src/app/app.component.html` contents to:
 
 ## Add search component to app
 
+Edit `src/app/app.component.html`:
+
 ```html
 <h1>Star Wars Character Search App</h1>
 <app-search></app-search>
+```
+
+## Add Form HTML to search component
+
+Edit `src/app/search/search.component.html`:
+
+```html
+<section>
+    <h2>Search For A Star Wars Character</h2>
+    <input type="text" placeholder="Character Name"/>
+    <input type="submit" value="Search"/>
+</section>
 ```
