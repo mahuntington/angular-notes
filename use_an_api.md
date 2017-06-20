@@ -156,3 +156,19 @@ constructor(
     private http: Http
 ) { }
 ```
+
+## Make an AJAX request
+
+In `src/app/search/search.component.ts`, `findCharacter(name)` should make a request to `swapi.io`:
+
+```javascript
+findCharacter(name){
+    this.http.get('http://swapi.co/api/people/?search=' + name)
+    .toPromise()
+    .then(response => console.log(response.json()));
+}
+```
+
+The `rxjs/add/operator/toPromise` import that we previously wrote adds the ability to change the `Observable` (more on this in another lecture) into a `Promise`
+
+You can test this by looking in the console
