@@ -7,6 +7,8 @@ import { LinksComponent } from './links/links.component';
 import { ResumeComponent } from './resume/resume.component';
 import { RouterModule } from '@angular/router';
 
+import { AppRoutingModule } from './app-routing.module'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,20 +18,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([
-      {
-        path: 'about',
-        component: AboutComponent
-      },
-      {
-        path: 'resume',
-        component: ResumeComponent
-      },
-      {
-        path: 'links',
-        component: LinksComponent
-      }
-    ])
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,8 @@
 1. Set up the router
 1. Tell the router where to display the components
 1. Create links to the different "pages"
+1. Create an external routing file
+1. Use external AppRoutingModule in app.module.ts
 
 ## Create a new angular app
 
@@ -189,4 +191,62 @@ When creating links, we don't use `href` anymore.  Instead we use `routerLink`. 
     </ul>
 </nav>
 <router-outlet></router-outlet>
+```
+
+## Create an external routing file
+
+As you can imagine, that `RouterModule.forRoot()` can get really lengthy.  Let's put it in a new file `src/app/app-routing.module.ts`:
+
+```javascript
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AboutComponent } from './about/about.component';
+import { LinksComponent } from './links/links.component';
+import { ResumeComponent } from './resume/resume.component';
+
+const routes: Routes = [
+    {
+        path: 'about',
+        component: AboutComponent
+    },
+    {
+        path: 'resume',
+        component: ResumeComponent
+    },
+    {
+        path: 'links',
+        component: LinksComponent
+    }
+];
+
+@NgModule({
+    imports: [ RouterModule.forRoot(routes) ],
+    exports: [ RouterModule ]
+})
+export class AppRoutingModule {}
+```
+
+## Use external AppRoutingModule in app.module.ts
+
+Now let's replace our routing with our new AppRoutingModule in `src/app/app.module.ts`:
+
+```javascript
+import { AppRoutingModule } from './app-routing.module'
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    AboutComponent,
+    LinksComponent,
+    ResumeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
