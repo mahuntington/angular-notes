@@ -8,4 +8,6 @@
 
 ```
 ng new starwars
+cd starwars
+ng serve --open
 ```
