@@ -93,7 +93,7 @@ Edit `src/app/resume/resume.component.html`:
     </li>
     <li>
         <dl>
-            <dt>2008-2010</dt>
+            <dt>2003-2008</dt>
             <dd>Software Engineer at Initech</dd>
         </dl>
     </li>
