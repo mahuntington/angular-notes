@@ -7,6 +7,7 @@
 1. Clean up app.component.html
 1. Add search component to app
 1. Add Form HTML to search component
+1. Import Form functionality into the app
 
 ## Create a new app
 
@@ -49,4 +50,32 @@ Edit `src/app/search/search.component.html`:
     <input type="text" placeholder="Character Name"/>
     <input type="submit" value="Search"/>
 </section>
+```
+
+## Import Form functionality into the app
+
+Edit `src/app/app.module.ts` to import `FormsModule` and place it as an import:
+
+```javascript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { SearchComponent } from './search/search.component';
+
+import { FormsModule } from '@angular/forms'; //import FormsModule
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        SearchComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule //add it as an import
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
