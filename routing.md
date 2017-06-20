@@ -135,21 +135,21 @@ Now add the module as an import in `src/app/app.module.ts` and define which modu
 
 ```javascript
 imports: [
-  BrowserModule,
-  RouterModule.forRoot([
-    {
-      path: 'about',
-      component: AboutComponent
-    },
-    {
-      path: 'resume',
-      component: ResumeComponent
-    },
-    {
-      path: 'links',
-      component: LinksComponent
-    }
-  ])
+    BrowserModule,
+    RouterModule.forRoot([
+        {
+            path: 'about',
+            component: AboutComponent
+        },
+        {
+            path: 'resume',
+            component: ResumeComponent
+        },
+        {
+            path: 'links',
+            component: LinksComponent
+        }
+    ])
 ],
 ```
 
@@ -235,18 +235,18 @@ Now let's replace our routing with our new AppRoutingModule in `src/app/app.modu
 import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponent,
-    LinksComponent,
-    ResumeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AboutComponent,
+        LinksComponent,
+        ResumeComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```

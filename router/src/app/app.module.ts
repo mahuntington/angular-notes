@@ -10,17 +10,17 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponent,
-    LinksComponent,
-    ResumeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AboutComponent,
+        LinksComponent,
+        ResumeComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
