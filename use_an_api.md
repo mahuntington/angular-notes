@@ -8,6 +8,7 @@
 1. Add search component to app
 1. Add Form HTML to search component
 1. Import Form functionality into the app
+1. Use ngModel to set a component property to the value of an input
 
 ## Create a new app
 
@@ -79,3 +80,5 @@ import { FormsModule } from '@angular/forms'; //import FormsModule
 })
 export class AppModule { }
 ```
+
+## Use ngModel to set a component property to the value of an input
