@@ -11,7 +11,7 @@ const routes: Routes = [
         component: AboutComponent
     },
     {
-        path: 'resume',
+        path: 'resume/:id',
         component: ResumeComponent
     },
     {

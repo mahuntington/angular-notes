@@ -81,3 +81,24 @@ In `src/app.app.component.html` loop through the jobs to create links:
     </ul>
 </nav>
 ```
+
+## Alter the resume route to accept params
+
+Our resume route in `src/app/app-routing.module.ts` no longer works.  Update it to accept params:
+
+```javascript
+const routes: Routes = [
+    {
+        path: 'about',
+        component: AboutComponent
+    },
+    {
+        path: 'resume/:id',
+        component: ResumeComponent
+    },
+    {
+        path: 'links',
+        component: LinksComponent
+    }
+];
+```
