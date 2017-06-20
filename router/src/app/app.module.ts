@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { EarlyLifeComponent } from './early-life/early-life.component';
 import { CareerComponent } from './career/career.component'
 
+import { AboutRoutingModule} from './about/about-routing.module'
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,7 +24,8 @@ import { CareerComponent } from './career/career.component'
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AboutRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]

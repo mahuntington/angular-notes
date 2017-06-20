@@ -6,6 +6,7 @@
 1. Create components for two sub sections
 1. Move the appropriate HTML to each sub section component
 1. Create a router just for the sub sections
+1. Replace the old main route with the new routing module
 
 ## Describe nested routes
 
@@ -51,7 +52,7 @@ import { CareerComponent } from '../career/career.component';
 
 const aboutRoutes: Routes = [
     {
-        path: 'about', //note the path for the main section
+        path: 'about',
         component: AboutComponent,
         children: [ //create the sub sections (children) for this route
             {
@@ -75,4 +76,45 @@ const aboutRoutes: Routes = [
     ]
 })
 export class AboutRoutingModule { }
+```
+
+## Replace the old main route with the new routing module
+
+Remove the `about` route in `src/app/app-routing.module.ts`:
+
+```javascript
+const routes: Routes = [
+    {
+        path: 'resume/:id',
+        component: ResumeComponent
+    },
+    {
+        path: 'links',
+        component: LinksComponent
+    }
+];
+```
+
+And add the `about-routing.module.ts` module to `src/app/app.module.ts`:
+
+```javascript
+import { AboutRoutingModule} from './about/about-routing.module'
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        AboutComponent,
+        LinksComponent,
+        ResumeComponent,
+        EarlyLifeComponent,
+        CareerComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AboutRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+})
 ```
