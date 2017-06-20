@@ -7,14 +7,18 @@ import { LinksComponent } from './links/links.component';
 import { ResumeComponent } from './resume/resume.component';
 import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
+import { EarlyLifeComponent } from './early-life/early-life.component';
+import { CareerComponent } from './career/career.component'
 
 @NgModule({
     declarations: [
         AppComponent,
         AboutComponent,
         LinksComponent,
-        ResumeComponent
+        ResumeComponent,
+        EarlyLifeComponent,
+        CareerComponent
     ],
     imports: [
         BrowserModule,

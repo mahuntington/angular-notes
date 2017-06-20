@@ -14,3 +14,8 @@ Sometimes you want to have sub sections within a specific route (routes within r
 We're going to split `/about` into `/about/early-life` and `/about/career`.
 
 Generate the two components:
+
+```
+ng generate component early-life
+ng generate component career
+```
