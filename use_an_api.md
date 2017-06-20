@@ -8,7 +8,7 @@
 1. Add search component to app
 1. Add Form HTML to search component
 1. Import Form functionality into the app
-1. Use ngModel to set a component property to the value of an input
+1. Set a component property to the value of an input
 
 ## Create a new app
 
@@ -81,4 +81,17 @@ import { FormsModule } from '@angular/forms'; //import FormsModule
 export class AppModule { }
 ```
 
-## Use ngModel to set a component property to the value of an input
+## Set a component property to the value of an input
+
+In `src/app/search/search.component.html`, add `[(ngModel)]` to the text input:
+
+```html
+<section>
+    <h2>Search For A Star Wars Character</h2>
+    Search String: {{name}}
+    <input [(ngModel)]="name" type="text" placeholder="Character Name"/>
+    <input type="submit" value="Search"/>
+</section>
+```
+
+Test this by changing the text in the input field
