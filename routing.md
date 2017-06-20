@@ -8,6 +8,8 @@
 1. Edit the HTML for the About, Links, and Resume components
 1. Display all components at once
 1. Set up the router
+1. Tell the router where to display the components
+1. Create links to the different "pages"
 
 ## Create a new angular app
 
@@ -147,4 +149,44 @@ imports: [
     }
   ])
 ],
+```
+
+## Tell the router where to display the components
+
+Now that we've set up the router, we need to tell it where to display the components.  Remove the component declarations in `src/app/app.component.html` and replace them with `<router-outlet></router-outlet>`
+
+```html
+<h1>Welcome To My Personal Site</h1>
+<router-outlet></router-outlet>
+```
+
+You can now test the different "pages" by going to
+
+- http://localhost:4200/about
+- http://localhost:4200/links
+- http://localhost:4200/resume
+
+## Create links to the different "pages"
+
+When creating links, we don't use `href` anymore.  Instead we use `routerLink`.  Edit `src/app/app.component.html`:
+
+```html
+<h1>Welcome To My Personal Site</h1>
+<nav>
+    <ul>
+        <li>
+            <a routerLink="/">Home</a>
+        </li>
+        <li>
+            <a routerLink="/about">About</a>
+        </li>
+        <li>
+            <a routerLink="/links">Links</a>
+        </li>
+        <li>
+            <a routerLink="/resume">Resume</a>
+        </li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>
 ```

@@ -1,4 +1,18 @@
 <h1>Welcome To My Personal Site</h1>
-<app-about></app-about>
-<app-links></app-links>
-<app-resume></app-resume>
+<nav>
+    <ul>
+        <li>
+            <a routerLink="/">Home</a>
+        </li>
+        <li>
+            <a routerLink="/about">About</a>
+        </li>
+        <li>
+            <a routerLink="/links">Links</a>
+        </li>
+        <li>
+            <a routerLink="/resume">Resume</a>
+        </li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>
