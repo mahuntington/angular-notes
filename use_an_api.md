@@ -9,6 +9,7 @@
 1. Add Form HTML to search component
 1. Import Form functionality into the app
 1. Set a component property to the value of an input
+1. Invoke a function when the user clicks a button
 
 ## Create a new app
 
@@ -95,3 +96,25 @@ In `src/app/search/search.component.html`, add `[(ngModel)]` to the text input:
 ```
 
 Test this by changing the text in the input field
+
+## Invoke a function when the user clicks a button
+
+In `src/app/search/search.component.ts` add a `findCharacter` method to SearchComponent:
+
+```javascript
+findCharacter(name){
+    console.log('finding ' + name);
+}
+```
+
+Call it in `src/app/search/search.component.html` (also remove the `Search String:{{name}}` test code):
+
+```html
+<section>
+    <h2>Search For A Star Wars Character</h2>
+    <input [(ngModel)]="name" type="text" placeholder="Character Name"/>
+    <input (click)="findCharacter(name)" type="submit" value="Search"/>
+</section>
+```
+
+Test this by looking in the console

@@ -9,6 +9,10 @@ export class SearchComponent implements OnInit {
 
   constructor() { }
 
+  findCharacter(name){
+      console.log('finding ' + name);
+  }
+
   ngOnInit() {
   }
 
