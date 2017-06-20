@@ -138,3 +138,51 @@ Test that this works by showing `jobIndex` in `src/app/resume/resume.component.h
 ```
 
 ## Show specific job data based on id param
+
+Import the `JOBS` data object:
+
+```javascript
+import { JOBS } from './jobs';
+```
+
+Now alter the `ResumeComponent` to
+
+1. have a `job` property, set by the URL param
+1. find the job that has a matching id to the one specified in the URL
+    - NOTE: `param.id` is a string, and `job.id` is a number, so we must call `parseInt(param.id)`
+
+```javascript
+export class ResumeComponent implements OnInit {
+
+    job; //set up public class member
+
+    constructor(
+        private route: ActivatedRoute //make URL routes available to class
+    ) { }
+
+    ngOnInit() {
+        this.route.params.forEach(
+            param => {
+                this.job = JOBS.find( job => { //find the element in the JOBS array...
+                    return job.id === parseInt(param.id) //... that has a matching id
+                });
+            }
+        );
+    }
+
+}
+```
+
+Now in `src/app/resume/resume.component.html` display the data:
+
+```html
+<h2>Job Description For: {{job.title}}</h2>
+<dl>
+    <dt>Dates</dt>
+    <dd>{{job.dates}}</dd>
+    <dt>Title</dt>
+    <dd>{{job.title}}</dd>
+    <dt>Description</dt>
+    <dd>{{job.description}}</dd>
+</dl>
+```
