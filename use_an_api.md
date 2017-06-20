@@ -13,6 +13,7 @@
 1. Add the ability to make AJAX requests
 1. Make an AJAX request
 1. Display AJAX results in app
+1. Display more data in the HTML
 
 ## Create a new app
 
@@ -212,3 +213,34 @@ Now add some HTML to `src/app/search/search.component.html` to display the resul
 ```
 
 You can test this in the app
+
+## Display more data in the HTML
+
+Edit `src/app/search/search.component.html`:
+
+```html
+<section *ngIf="results">
+    <h2>Search Results</h2>
+    <ul>
+        <li *ngFor="let character of results">
+            <h3>{{character.name}}</h3>
+            <dl>
+                <dt>Birth Year</dt>
+                <dd>{{character.birth_year}}</dd>
+                <dt>Eye Color</dt>
+                <dd>{{character.eye_color}}</dd>
+                <dt>Hair Color</dt>
+                <dd>{{character.hair_color}}</dd>
+                <dt>Gender</dt>
+                <dd>{{character.gender}}</dd>
+                <dt>Height</dt>
+                <dd>{{character.height}}</dd>
+                <dt>Mass</dt>
+                <dd>{{character.mass}}</dd>
+                <dt>Skin Color</dt>
+                <dd>{{character.skin_color}}</dd>
+            </dl>
+        </li>
+    </ul>
+</section>
+```
