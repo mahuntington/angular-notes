@@ -10,6 +10,7 @@
 1. Import Form functionality into the app
 1. Set a component property to the value of an input
 1. Invoke a function when the user clicks a button
+1. Add the ability to make AJAX requests
 
 ## Create a new app
 
@@ -118,3 +119,40 @@ Call it in `src/app/search/search.component.html` (also remove the `Search Strin
 ```
 
 Test this by looking in the console
+
+## Add the ability to make AJAX requests
+
+Add `HttpModule` to `src/app/app.module.ts`:
+
+```javascript
+import { HttpModule } from '@angular/http'; //import module
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        SearchComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule, //add HttpModule here
+        FormsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+})
+```
+
+Now edit `src/app/search/search.component.ts` to import appropriate modules:
+
+```javascript
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+```
+
+And tell the constructor of the `SearchComponent` class to add an `http` property:
+
+```javascript
+constructor(
+    private http: Http
+) { }
+```
