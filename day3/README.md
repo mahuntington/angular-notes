@@ -31,6 +31,8 @@ Test it out.  In the network tab of your Chrome Developer Tools, see how a reque
 
 ## Switch from a Promise to an Observable
 
+Nomally, `this.http.get()` returns an observable.  We convert it to a traditional promise with `toPromise()`.  Let's remove `toPromise()` and use the default functionality of `this.http.get()`.
+
 In `src/app/search/search.component.ts` edit the `findCharacter` method of `SearchComponent`.
 
 ```javascript
