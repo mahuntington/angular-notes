@@ -7,6 +7,7 @@
 1. Switch from a Promise to an Observable
 1. Make typing into an input field an observable
 1. Have a subscriber act only after a pause in events from an observable
+1. Check for distinct events from an observable
 
 ## Describe publish/subscribe model and how it relates to Observables
 
@@ -29,7 +30,7 @@ Firstly, we want it to search as the user types into the input (like how google 
 </section>
 ```
 
-Test it out.  In the network tab of your Chrome Developer Tools, see how a request goes out for every letter?  And they don't always come back in order, either.  With Observables, we can fix this.
+Test it out.  In the network tab of your Chrome Developer Tools, see how a request goes out for every letter?  This can use up data unnecessarily.  Also, the responses don't always come back in order.  With Observables, we can fix this.
 
 ## Switch from a Promise to an Observable
 
@@ -139,7 +140,7 @@ Now add `debounceTime` to the subscription in `ngOnInit()`:
 ```javascript
 ngOnInit() {
     this.searchSubject
-        .debounceTime(300)
+        .debounceTime(300) //add this
         .subscribe(name => {
             this.http.get('http://swapi.co/api/people/?search=' + name)
                 .subscribe(response => this.results = response.json().results);
@@ -148,3 +149,27 @@ ngOnInit() {
 ```
 
 Now try typing.  You should see that a request goes out only when you pause your typing.
+
+## Check for distinct events from an observable
+
+Try selecting the input with your cursor, typing in a value, and then hitting tab to make the cursor move away from the input box.  You should see a second request go out to the same location, even though the search value is the same as before.  Let's fix this.
+
+Just like with `debounceTime`, we want to add the `distinctUntilChanged` ability.  This will examine the current event to see if it was the same as the previous event.  If it is, it will discard it.  Add the following:
+
+```javascript
+import 'rxjs/add/operator/distinctUntilChanged';
+```
+
+Now alter the subscriber in `ngOnInit`:
+
+```javascript
+ngOnInit() {
+    this.searchSubject
+        .debounceTime(300)
+        .distinctUntilChanged() //add this
+        .subscribe(name => {
+            this.http.get('http://swapi.co/api/people/?search=' + name)
+                .subscribe(response => this.results = response.json().results);
+        })
+}
+```

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject'
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
     selector: 'app-search',
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
         this.searchSubject
             .debounceTime(300)
+            .distinctUntilChanged()
             .subscribe(name => {
                 this.http.get('http://swapi.co/api/people/?search=' + name)
                     .subscribe(response => this.results = response.json().results);
