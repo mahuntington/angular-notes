@@ -388,3 +388,12 @@ and:
 ```html
 <li *ngFor="let character of apiObservable | async">
 ```
+
+You might notice that "Search Results" is always displayed even when there are no results.  Let's change that:
+
+```html
+<section>
+    <h2 *ngIf="(apiObservable | async) !== null">Search Results</h2>
+```
+
+Now the `h2` subscribes to the observable and tests to see if there are values in it
