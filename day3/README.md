@@ -4,6 +4,7 @@
 
 1. Describe publish/subscribe model and how it relates to Observables
 1. Demonstrate when a normal promise is not optimal
+1. Switch from a Promise to an Observable
 
 ## Describe publish/subscribe model and how it relates to Observables
 
@@ -27,3 +28,20 @@ Firstly, we want it to search as the user types into the input (like how google 
 ```
 
 Test it out.  In the network tab of your Chrome Developer Tools, see how a request goes out for every letter?  And they don't always come back in order, either.  With Observables, we can fix this.
+
+## Switch from a Promise to an Observable
+
+In `src/app/search/search.component.ts` edit the `findCharacter` method of `SearchComponent`.
+
+```javascript
+findCharacter(name){
+    this.http.get('http://swapi.co/api/people/?search=' + name)
+        .subscribe(response => this.results = response.json().results);
+}
+```
+
+Since we aren't using `toPromise` anymore, we can eliminate this line of code in `src/app/search/search.component.ts`
+
+```javascript
+import 'rxjs/add/operator/toPromise';
+```
