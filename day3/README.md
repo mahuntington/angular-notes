@@ -10,6 +10,7 @@
 1. Check for distinct events from an observable
 1. Create a service for an observable
 1. Format the content of the event being published
+1. Pass an observable off to the HTML
 
 ## Describe publish/subscribe model and how it relates to Observables
 
@@ -309,4 +310,81 @@ Back in `src/app/search/search.component.ts` we can simplify what comes back fro
 ```javascript
 this.searchService.createAPIObservable(name)
     .subscribe(results => this.results = results);
+```
+
+## Pass an observable off to the HTML
+
+We can operate on an observable in the HTML.  This cleans up our code a bit.  First add `switchMap` functionality to `src/app/search/search.component.ts`:
+
+```javascript
+import 'rxjs/add/operator/switchMap';
+```
+
+Now change subscribe to switchMap.
+
+```javascript
+this.searchSubject
+    .debounceTime(300)
+    .distinctUntilChanged()
+    .switchMap(name => this.searchService.createAPIObservable(name))
+    .subscribe(results => this.results = results);
+```
+
+`.subscribe(results => this.results = results)` is actually subscribing to the observable created by `searchService`, NOT `searchSubject`.  It may look like it's subscribing to `this.searchSubject`, but it's not.  It's essentially mapping any event published by `searchSubject` to the one created by `this.searchService.createAPIObservable()`.
+
+Lastly, we can remove the `.subscribe()` code altogether and set `this.results` to the observable returned by the rest of the statement:
+
+```javascript
+ngOnInit() {
+    this.results = this.searchSubject
+        .debounceTime(300)
+        .distinctUntilChanged()
+        .switchMap(name => this.searchService.createAPIObservable(name));
+}
+```
+
+Now change the HTML in `src/app/search/search.component.html` to handle the fact that `this.results` is actually an observable.
+
+```html
+<li *ngFor="let character of results | async">
+```
+
+This should work.  Let's clean up our names so it's clear.  Edit `src/app/search/search.component.ts`:
+
+```javascript
+export class SearchComponent implements OnInit {
+
+    apiObservable; //used to be results
+    searchSubject = new Subject();
+
+    constructor(
+        private http: Http,
+        private searchService: SearchService
+    ) { }
+
+    findCharacter(name){
+        this.searchSubject.next(name);
+    }
+
+    ngOnInit() {
+        //this.results = this.apiObservable
+        this.apiObservable = this.searchSubject
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .switchMap(name => this.searchService.createAPIObservable(name));
+    }
+
+}
+```
+
+Now edit `src/app/search/search.component.html`:
+
+```html
+<section *ngIf="apiObservable">
+```
+
+and:
+
+```html
+<li *ngFor="let character of apiObservable | async">
 ```

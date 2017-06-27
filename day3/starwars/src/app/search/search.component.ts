@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { Subject } from 'rxjs/Subject'
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 import { SearchService } from './search.service'
 
@@ -14,7 +15,7 @@ import { SearchService } from './search.service'
 })
 export class SearchComponent implements OnInit {
 
-    results;
+    apiObservable;
     searchSubject = new Subject();
 
     constructor(
@@ -27,13 +28,10 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.searchSubject
+        this.apiObservable = this.searchSubject
             .debounceTime(300)
             .distinctUntilChanged()
-            .subscribe(name => {
-                this.searchService.createAPIObservable(name)
-                    .subscribe(results => this.results = results);
-            })
+            .switchMap(name => this.searchService.createAPIObservable(name));
     }
 
 }
