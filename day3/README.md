@@ -9,6 +9,7 @@
 1. Have a subscriber act only after a pause in events from an observable
 1. Check for distinct events from an observable
 1. Create a service for an observable
+1. Format the content of the event being published
 
 ## Describe publish/subscribe model and how it relates to Observables
 
@@ -275,4 +276,37 @@ Now add it as a provider in `src/app/app.module.ts`:
     providers: [SearchService], //edit this line
     bootstrap: [AppComponent]
 })
+```
+
+## Format the content of the event being published
+
+Look at `src/app/search/search.component.ts`:
+
+```javascript
+this.searchService.createAPIObservable(name)
+    .subscribe(response => this.results = response.json().results);
+```
+
+Right now in our subscribe callback, we have to go in and format the response to JSON and then set get the results property of that value.  What if all subscribers don't want to have to deal with that?  What if we just want to have the `SearchService` handle that aspect so that all the subscribers have to do is deal with the results array?
+
+In `src/app/search/search.service.ts`, add the following:
+
+```javascript
+createAPIObservable(name){
+    return this.http.get('http://swapi.co/api/people/?search=' + name)
+        .map(response=> response.json().results );
+}
+```
+
+We'll get an error about `map()` not existing, so let's add the necessary import:
+
+```javascript
+import 'rxjs/add/operator/map';
+```
+
+Back in `src/app/search/search.component.ts` we can simplify what comes back from the observable:
+
+```javascript
+this.searchService.createAPIObservable(name)
+    .subscribe(results => this.results = results);
 ```

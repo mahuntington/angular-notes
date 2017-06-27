@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
             .distinctUntilChanged()
             .subscribe(name => {
                 this.searchService.createAPIObservable(name)
-                    .subscribe(response => this.results = response.json().results);
+                    .subscribe(results => this.results = results);
             })
     }
 
