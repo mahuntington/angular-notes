@@ -8,6 +8,7 @@
 1. Make typing into an input field an observable
 1. Have a subscriber act only after a pause in events from an observable
 1. Check for distinct events from an observable
+1. Create a service for an observable
 
 ## Describe publish/subscribe model and how it relates to Observables
 
@@ -172,4 +173,106 @@ ngOnInit() {
                 .subscribe(response => this.results = response.json().results);
         })
 }
+```
+
+## Create a service for an observable
+
+Our code could be cleaner.  Let's move the HTTP action to a service, so that other components can use it if they want.  First create `src/app/search/search.service.ts`.  Now have it export a class like normal:
+
+```javascript
+export class SearchService {
+}
+```
+
+Since this is a service, not a component, let's make it `Injectable`:
+
+```javascript
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class SearchService {
+}
+```
+
+Now we can inject the service in components.
+
+Next, let's create a method that will make the API call and return the observable.  Copy the `this.http.get('http://swapi.co/api/people/?search=' + name)` code from `src/app/search/search.component.ts` to `src/app/search/search.service.ts`:
+
+```javascript
+export class SearchService {
+    createAPIObservable(name){
+        return this.http.get('http://swapi.co/api/people/?search=' + name);
+    }
+}
+```
+
+We need to import the Http module into `src/app/search/search.service.ts`, though:
+
+```javascript
+import { Http } from '@angular/http';
+```
+
+And inject it into the component:
+
+```javascript
+export class SearchService {
+
+    constructor(private http: Http) {}
+
+    createAPIObservable(name){
+        return this.http.get('http://swapi.co/api/people/?search=' + name);
+    }
+
+}
+```
+
+Now in `src/app/search/search.component.ts` import the new service:
+
+```javascript
+import { SearchService } from './search.service'
+```
+
+Inject the service into the component in `src/app/search/search.component.ts`:
+
+```javascript
+constructor(
+    private http: Http,
+    private searchService: SearchService
+) { }
+```
+
+And replace `this.http.get()` with the service:
+
+```javascript
+this.searchSubject
+    .debounceTime(300)
+    .distinctUntilChanged()
+    .subscribe(name => {
+        this.searchService.createAPIObservable(name)
+            .subscribe(response => this.results = response.json().results);
+    })
+```
+
+You might see an error in your Chrome console.  We still need to specify our new service as a provider, either at the app level or at the component level.  Let's do at the app level, so that other components can use it if they need to later.  Edit `src/app/app.module.ts` to add the import:
+
+```javascript
+import { SearchService } from './search/search.service'
+```
+
+Now add it as a provider in `src/app/app.module.ts`:
+
+```javascript
+@NgModule({
+    declarations: [
+        AppComponent,
+        SearchComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        FormsModule
+    ],
+    providers: [SearchService], //edit this line
+    bootstrap: [AppComponent]
+})
 ```

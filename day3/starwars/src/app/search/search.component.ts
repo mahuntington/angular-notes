@@ -5,6 +5,8 @@ import { Subject } from 'rxjs/Subject'
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+import { SearchService } from './search.service'
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
@@ -16,7 +18,8 @@ export class SearchComponent implements OnInit {
     searchSubject = new Subject();
 
     constructor(
-        private http: Http
+        private http: Http,
+        private searchService: SearchService
     ) { }
 
     findCharacter(name){
@@ -28,7 +31,7 @@ export class SearchComponent implements OnInit {
             .debounceTime(300)
             .distinctUntilChanged()
             .subscribe(name => {
-                this.http.get('http://swapi.co/api/people/?search=' + name)
+                this.searchService.createAPIObservable(name)
                     .subscribe(response => this.results = response.json().results);
             })
     }
