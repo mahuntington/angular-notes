@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject'
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
     selector: 'app-search',
@@ -22,10 +23,12 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.searchSubject.subscribe(name => {
-            this.http.get('http://swapi.co/api/people/?search=' + name)
-                .subscribe(response => this.results = response.json().results);
-        })
+        this.searchSubject
+            .debounceTime(300)
+            .subscribe(name => {
+                this.http.get('http://swapi.co/api/people/?search=' + name)
+                    .subscribe(response => this.results = response.json().results);
+            })
     }
 
 }

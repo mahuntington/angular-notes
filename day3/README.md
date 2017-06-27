@@ -6,6 +6,7 @@
 1. Demonstrate when a normal promise is not optimal
 1. Switch from a Promise to an Observable
 1. Make typing into an input field an observable
+1. Have a subscriber act only after a pause in events from an observable
 
 ## Describe publish/subscribe model and how it relates to Observables
 
@@ -116,3 +117,34 @@ ngOnInit() {
     })
 }
 ```
+
+## Have a subscriber act only after a pause in events from an observable
+
+Our setup is just as inefficient as before.  It still makes a request with every key stroke.  This is because our `searchSubject` observable is publishing a constant stream of events.  Each time a new character is typed, a new event is published.  Let's fine tune this so that our subscriber in `ngOnInit` waits until it receives an event that is followed by a certain amount of time.  This way, it's waiting for us to pause our typing.
+
+To do this, we'll need to add the `debounce` functionality from `rxjs`.  To do this, we just run the following:
+
+```javascript
+import 'rxjs/add/operator/debounceTime';
+```
+
+Here's the definition of debounce:
+
+> Bouncing is the tendency of any two metal contacts in an electronic device to generate multiple signals as the contacts close or open; debouncing is any kind of hardware device or software that ensures that only a single signal will be acted upon for a single opening or closing of a contact
+
+It's kind of like what we're doing, right?
+
+Now add `debounceTime` to the subscription in `ngOnInit()`:
+
+```javascript
+ngOnInit() {
+    this.searchSubject
+        .debounceTime(300)
+        .subscribe(name => {
+            this.http.get('http://swapi.co/api/people/?search=' + name)
+                .subscribe(response => this.results = response.json().results);
+        })
+}
+```
+
+Now try typing.  You should see that a request goes out only when you pause your typing.
