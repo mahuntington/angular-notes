@@ -15,3 +15,7 @@ Look around [the comments app](comments/).  This is just a basic app that displa
 ## Changing a Feature
 
 Look again at what you did in [the comments app](comments/).  It's all in one component, which isn't very modular.  Put the list of comments into one component and put the new comments form into another component.  Use observables to communicate between the two.
+
+At the moment, there's no styling.  Add some by incorporating [Bootstrap](http://getbootstrap.com/), [Materialize](http://materializecss.com/), or [Skeleton](http://getskeleton.com/).  Feel free to write your own CSS as an alternative to using one of the above CSS frameworks.
+
+## Fixing Bugs
