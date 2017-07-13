@@ -34,4 +34,5 @@ Do whatever you want during this time!  Here are some suggestions:
             - Once logged in, the user is taken to the main comments app as it was before
             - Alter this app so that when adding new comments, there is no `author` text input field.  Instead, the logged in user's full name is used.
 - Create a brand new app, using one of [these free APIs that don't require authentication](https://shkspr.mobi/blog/2016/05/easy-apis-without-authentication/).  There are some more links [here](https://github.com/toddmotto/public-apis), but some of them require authentication.
+- Deploy your own backend api and use that in an app
 - See if you can create a game like Tic-Tac-Toe or Hangman
