@@ -1,1 +1,13 @@
 # Exercises with code bases
+
+## Adding a Feature
+
+Look around [the comments app](comments/).  This is just a basic app that displays a list of comments
+
+- Alter it so that each comment has an author, represented by a string.
+- Add a feature that allows you to add more comments
+    - This should be all within the same component
+    - Visually, it should consist of two text inputs (one for author, one for comment) and a submit button
+- Add a feature that allows you to delete comments
+- Add a feature that allows you to edit comments
+    - You should be able to click on a comment, and the text will be replaced by two text inputs (one for author, one for comment)
