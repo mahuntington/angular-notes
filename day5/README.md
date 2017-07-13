@@ -1,4 +1,4 @@
-# Exercises with code bases
+# Exercises With Code Bases
 
 ## Adding a Feature
 
@@ -21,3 +21,17 @@ At the moment, there's no styling.  Add some by incorporating [Bootstrap](http:/
 ## Fixing Bugs
 
 Someone has hacked up the [Tour Of Heroes](https://angular.io/tutorial/toh-pt5) demo from google!  Go into [heroes](heroes/), run `npm install` and `npm start` to start the app.  Try to fix all the errors so that it works like [this](https://embed.plnkr.co/?show=preview).  Try not to look at the code listed in the previous link, unless you're absolutely stumped.
+
+## Choose Your Own Adventure
+
+Do whatever you want during this time!  Here are some suggestions:
+
+- Extend your [comments app](comments/) even further by creating sign-up/log-in functionality:
+        - Use routing to display a main page which prompts them with links to two pages (log in/sign up)
+        - On the sign up page, users can create a user with a username, full name, password, and email
+            - username and email must by unique!  No two users can have the same username or email address
+        - On the log in page, users can log in with either email or username and password.  The user must already exist
+            - Once logged in, the user is taken to the main comments app as it was before
+            - Alter this app so that when adding new comments, there is no `author` text input field.  Instead, the logged in user's full name is used.
+- Create a brand new app, using one of [these free APIs that don't require authentication](https://shkspr.mobi/blog/2016/05/easy-apis-without-authentication/).  There are some more links [here](https://github.com/toddmotto/public-apis), but some of them require authentication.
+- See if you can create a game like Tic-Tac-Toe or Hangman
