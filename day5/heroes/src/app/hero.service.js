@@ -6,13 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mock_heroes_1 = require("./mock-heroes");
 var core_1 = require("@angular/core");
 var HeroService = (function () {
     function HeroService() {
     }
     HeroService.prototype.getHeroes = function () {
-        return Promise.resolve(mock_heroes_1.HEROES);
+        return Promise.resolve(HEROES);
     };
     HeroService.prototype.getHeroesSlowly = function () {
         var _this = this;
